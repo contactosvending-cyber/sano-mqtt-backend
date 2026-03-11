@@ -9,12 +9,12 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install dependencies first (better layer caching)
-COPY package.json package-lock.json* ./
+COPY backend/package.json backend/package-lock.json* ./
 
 RUN npm install --omit=dev && npm cache clean --force
 
 # Copy application source
-COPY . .
+COPY backend/ .
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
