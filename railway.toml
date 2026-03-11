@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "backend/Dockerfile"
+
+[deploy]
+startCommand = "docker-compose up -d"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
