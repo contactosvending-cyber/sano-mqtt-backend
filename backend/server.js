@@ -78,12 +78,11 @@ app.param('mac', (req, res, next, mac) => {
 // Health & Status Routes
 // =============================================================================
 
-/** GET /health - Health check (used by Docker) */
+/** GET /health - Health check (used by Docker/Railway) */
 app.get('/health', (req, res) => {
   const mqtt = mqttClient.getStatus();
-  const healthy = mqtt.connected;
-  return res.status(healthy ? 200 : 503).json({
-    status: healthy ? 'healthy' : 'degraded',
+  return res.status(200).json({
+    status: mqtt.connected ? 'healthy' : 'degraded',
     timestamp: new Date().toISOString(),
     mqtt,
   });
