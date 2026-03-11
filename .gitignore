@@ -1,0 +1,61 @@
+# =============================================================================
+# .gitignore - Sano MQTT Backend
+# Node.js + Docker
+# =============================================================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.pnp
+.pnp.js
+
+# Logs
+logs/
+*.log
+mosquitto/log/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables (NEVER commit secrets)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Mosquitto password file (contains hashed credentials)
+mosquitto/passwd
+mosquitto/data/
+
+# Docker volumes and build cache
+.docker/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build output
+dist/
+build/
+
+# Coverage reports
+coverage/
+.nyc_output/

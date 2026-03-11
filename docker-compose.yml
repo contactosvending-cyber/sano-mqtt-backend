@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: sano-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    networks:
+      - sano-network
+
+  backend:
+    build: ./backend
+    container_name: sano-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - MQTT_URL=mqtt://mosquitto:1883
+      - MQTT_USERNAME=sano_admin
+      - MQTT_PASSWORD=SanoPass2024!
+      - PORT=3000
+    depends_on:
+      - mosquitto
+    networks:
+      - sano-network
+
+networks:
+  sano-network:
+    driver: bridge
+
+volumes:
+  mosquitto_data:
+  mosquitto_logs:
